@@ -1,36 +1,27 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Login() {
-  const [persons, setPersons] = useState([
-    { username: "jul23", password: "12345678" },
-  ])
-  const [newUser, setNewUser] = useState("")
-  const [newPassword, setNewPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const router = useRouter()
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
-    const found = persons.find((person) => person.username === newUser)
-    if (found) {
-      if (found.password === newPassword) {
-        console.log("Log In correct")
-      } else {
-        alert("Incorrect password")
-        return
-      }
+
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+
+    if (res.ok) {
+      router.push("/applications")
     } else {
-      alert(`${newUser} is not exist`)
-      return
+      alert("Invalid credentials")
     }
-  }
-
-  const handleUserChange = (event) => {
-    setNewUser(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setNewPassword(event.target.value)
   }
 
   return (
@@ -38,11 +29,10 @@ export default function Login() {
       <h1>Log in</h1>
       <form onSubmit={handleLogin}>
         <div>
-          Username: <input value={newUser} onChange={handleUserChange} />
+          Email: <input value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div>
-          Password:{" "}
-          <input value={newPassword} onChange={handlePasswordChange} />
+          Password: <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
         </div>
         <div>
           <button>Log in</button>

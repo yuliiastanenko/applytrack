@@ -28,4 +28,15 @@ model Application {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  events Event[]
+}
+
+model Event {
+  id            String   @id @default(cuid())
+  type          String
+  date          DateTime @default(now())
+  note          String?
+
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
 }

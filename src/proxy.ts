@@ -1,16 +1,21 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
 export function proxy(request: NextRequest) {
-  const userId = request.cookies.get('userId')?.value
+  const userId = request.cookies.get("userId")?.value
 
   if (!userId) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(new URL("/login", request.url))
   }
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/applications/:path*', '/board/:path*'],
+  matcher: [
+    "/applications/:path*",
+    "/board/:path*",
+    "/criteria/:path*",
+    "/feed/:path*",
+  ],
 }

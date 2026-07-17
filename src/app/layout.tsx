@@ -29,9 +29,22 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
-        <nav>
-          <a href="/login">Login</a> | <a href="/applications">Applications</a>{" "}
-          | <a href="/board">Board</a>
+        <nav className="max-w-3xl mx-auto px-6 py-4 flex gap-4 text-sm text-gray-600 border-b border-gray-200">
+          <a href="/login" className="hover:text-black">
+            Login
+          </a>
+          <a href="/applications" className="hover:text-black">
+            Applications
+          </a>
+          <a href="/board" className="hover:text-black">
+            Board
+          </a>
+          <a href="/criteria" className="hover:text-black">
+            Criteria
+          </a>
+          <a href="/feed" className="hover:text-black">
+            Vacancies
+          </a>
         </nav>
       </body>
     </html>

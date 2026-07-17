@@ -18,6 +18,8 @@ model User {
   name         String?
   password     String
   applications Application[]
+  criteria SearchCriteria[]
+  listings JobListing[]
 }
 
 model Application {
@@ -26,6 +28,7 @@ model Application {
   position String
   status   String @default("WISHLIST")
 
+  listing JobListing?
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   events Event[]
@@ -39,4 +42,40 @@ model Event {
 
   applicationId String
   application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model SearchCriteria {
+  id         String   @id @default(cuid())
+  label      String
+  keywords   String[]
+  remoteOnly Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listings JobListing[]
+}
+
+model JobListing {
+  id          String   @id @default(cuid())
+  externalId  String
+  source      String
+  title       String
+  company     String
+  url         String
+  location    String?
+  description String?
+  fetchedAt   DateTime @default(now())
+  seen        Boolean  @default(false)
+  dismissed   Boolean  @default(false)
+
+  userId     String
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  criteriaId String?
+  criteria   SearchCriteria? @relation(fields: [criteriaId], references: [id], onDelete: SetNull)
+
+  applicationId String?      @unique
+  application   Application? @relation(fields: [applicationId], references: [id])
+
+  @@unique([userId, source, externalId])
 }

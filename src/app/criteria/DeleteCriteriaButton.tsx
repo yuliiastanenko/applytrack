@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/navigation"
 
-export default function DeleteButton({ id }) {
+export default function DeleteCriteriaButton({ id }: { id: string }) {
   const router = useRouter()
 
   const handleDelete = async () => {
-    await fetch(`/api/applications/${id}`, { method: "DELETE" })
+    await fetch(`/api/criteria/${id}`, { method: "DELETE" })
     router.refresh()
   }
 

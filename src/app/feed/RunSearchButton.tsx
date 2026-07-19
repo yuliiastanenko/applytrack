@@ -1,15 +1,20 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 
 export default function RunSearchButton() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const tags = searchParams.get("tags")
 
   const handleClick = async () => {
     setLoading(true)
-    await fetch("/api/search-jobs")
+    const url = tags
+      ? `/api/search-jobs?tags=${encodeURIComponent(tags)}`
+      : "/api/search-jobs"
+    await fetch(url)
     setLoading(false)
     router.refresh()
   }

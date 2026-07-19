@@ -45,11 +45,13 @@ model Event {
 }
 
 model SearchCriteria {
-  id         String   @id @default(cuid())
-  label      String
-  keywords   String[]
-  remoteOnly Boolean  @default(true)
-  createdAt  DateTime @default(now())
+  id           String   @id @default(cuid())
+  label        String
+  keywords     String[]
+  notifyEmail  String
+  intervalDays Int      @default(3)
+  lastSentAt   DateTime?
+  createdAt    DateTime @default(now())
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -78,4 +80,12 @@ model JobListing {
   application   Application? @relation(fields: [applicationId], references: [id])
 
   @@unique([userId, source, externalId])
+}
+
+model DigestLog {
+  id        String   @id @default(cuid())
+  criteriaId String
+  sentAt    DateTime @default(now())
+  jobCount  Int
+  status    String
 }

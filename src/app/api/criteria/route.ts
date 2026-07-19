@@ -16,7 +16,8 @@ export async function POST(request: Request) {
     data: {
       label: body.label,
       keywords: body.keywords,
-      remoteOnly: body.remoteOnly ?? true,
+      notifyEmail: body.notifyEmail,
+      intervalDays: body.intervalDays,
       userId,
     },
   })

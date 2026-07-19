@@ -6,6 +6,12 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params
+
+  await db.jobListing.deleteMany({
+    where: { criteriaId: id, applicationId: null },
+  })
+
   await db.searchCriteria.delete({ where: { id } })
+
   return NextResponse.json({ deleted: true })
 }

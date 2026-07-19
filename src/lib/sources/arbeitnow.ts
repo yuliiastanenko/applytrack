@@ -1,22 +1,19 @@
 import type { JobSource, NormalizedJob } from "./types"
 
-type RemotiveJob = {
-  id: number
+type ArbeitnowJob = {
+  slug: string
   title: string
   company_name: string
   url: string
-  candidate_required_location?: string
+  location?: string
   description?: string
 }
 
-export const remotive: JobSource = {
-  name: "remotive",
+export const arbeitnow: JobSource = {
+  name: "arbeitnow",
 
   async fetchJobs(keywords: string[]): Promise<NormalizedJob[]> {
-    const query = keywords.join(" ")
-    const response = await fetch(
-      `https://remotive.com/api/remote-jobs?search=${encodeURIComponent(query)}`
-    )
+    const response = await fetch("https://www.arbeitnow.com/api/job-board-api")
 
     if (!response.ok) {
       return []
@@ -24,13 +21,13 @@ export const remotive: JobSource = {
 
     const data = await response.json()
 
-    const jobs = data.jobs.map((job: RemotiveJob) => ({
-      externalId: String(job.id),
-      source: "remotive",
+    const jobs = data.data.map((job: ArbeitnowJob) => ({
+      externalId: job.slug,
+      source: "arbeitnow",
       title: job.title,
       company: job.company_name,
       url: job.url,
-      location: job.candidate_required_location ?? null,
+      location: job.location ?? null,
       description: job.description ?? null,
     }))
 

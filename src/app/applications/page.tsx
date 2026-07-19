@@ -22,7 +22,7 @@ export default async function Applications({
   })
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="w-175 mx-auto px-6 py-6">
       <h1 className="text-2xl font-semibold mb-4">Applications</h1>
 
       <form className="flex gap-2 mb-4">

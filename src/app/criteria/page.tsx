@@ -8,7 +8,7 @@ export default async function Criteria() {
   const criteria = await db.searchCriteria.findMany({ where: { userId } })
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="w-175 mx-auto px-6 py-6">
       <h1 className="text-2xl font-semibold mb-4">Email digest</h1>
       <NewCriteriaForm />
       <div className="flex flex-col gap-2 mt-4">

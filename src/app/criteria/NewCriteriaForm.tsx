@@ -8,12 +8,14 @@ export default function NewCriteriaForm() {
   const [keywords, setKeywords] = useState("")
   const [email, setEmail] = useState("")
   const [intervalDays, setIntervalDays] = useState("3")
+  const [error, setError] = useState("")
   const router = useRouter()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setError("")
 
-    await fetch("/api/criteria", {
+    const res = await fetch("/api/criteria", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -23,6 +25,11 @@ export default function NewCriteriaForm() {
         intervalDays: Number(intervalDays),
       }),
     })
+
+    if (!res.ok) {
+      setError("Please fill in all fields correctly.")
+      return
+    }
 
     setLabel("")
     setKeywords("")
@@ -69,6 +76,7 @@ export default function NewCriteriaForm() {
       >
         Add
       </button>
+       {error && <p className="text-red-500 text-sm">{error}</p>}
     </form>
   )
 }

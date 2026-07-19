@@ -28,10 +28,12 @@ model Application {
   position String
   status   String @default("WISHLIST")
 
-  listing JobListing?
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  events Event[]
+  listing    JobListing?
+  followUpAt DateTime?
+  createdAt  DateTime @default(now())
+  userId     String
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  events     Event[]
 }
 
 model Event {

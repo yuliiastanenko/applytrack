@@ -18,6 +18,11 @@ export async function POST(request: Request) {
   }
 
   const response = NextResponse.json({ success: true })
-  response.cookies.set("userId", user.id)
+  response.cookies.set("userId", user.id, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  })
   return response
 }

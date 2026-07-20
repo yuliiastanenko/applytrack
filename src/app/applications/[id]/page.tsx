@@ -2,6 +2,7 @@ import { db } from "@/lib/db"
 import StatusButton from "../StatusButton"
 import NewEventForm from "./NewEventForm"
 import { eventColors } from "@/lib/statusColors"
+import FollowUpInput from "./FollowUpInput"
 
 export default async function ApplicationDetail({
   params,
@@ -28,6 +29,15 @@ export default async function ApplicationDetail({
         </div>
         <StatusButton id={application.id} currentStatus={application.status} />
       </div>
+
+      <FollowUpInput
+        applicationId={application.id}
+        initialDate={
+          application.followUpAt
+            ? application.followUpAt.toISOString().slice(0, 10)
+            : ""
+        }
+      />
 
       <h2 className="text-sm font-medium text-gray-500 uppercase mb-3">
         Timeline

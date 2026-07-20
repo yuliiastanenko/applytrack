@@ -23,7 +23,9 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const body = await request.json()
   const userId = await getCurrentUserId()
-
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
   const result = applicationSchema.safeParse(body)
 
   if (!result.success) {

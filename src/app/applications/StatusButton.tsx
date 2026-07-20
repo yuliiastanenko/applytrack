@@ -12,10 +12,16 @@ const statuses = [
   "REJECTED",
 ]
 
-export default function StatusButton({ id, currentStatus }) {
+export default function StatusButton({
+  id,
+  currentStatus,
+}: {
+  id: string
+  currentStatus: string
+}) {
   const router = useRouter()
 
-  const handleChange = async (event) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     await fetch(`/api/applications/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

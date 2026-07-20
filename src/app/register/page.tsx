@@ -11,7 +11,7 @@ export default function Register() {
   const [error, setError] = useState("")
   const router = useRouter()
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setError("")
 
@@ -54,12 +54,15 @@ export default function Register() {
           className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button className="bg-black text-white rounded-lg px-4 py-2 text-sm">
+        <button className="bg-blue-500 text-white rounded-lg px-4 py-2 text-sm">
           Sign up
         </button>
       </form>
       <p className="text-sm text-gray-500 mt-3">
-        Already have an account? <Link href="/login" className="text-black hover:underline">Log in</Link>
+        Already have an account?{" "}
+        <Link href="/login" className="text-black hover:underline">
+          Log in
+        </Link>
       </p>
     </div>
   )

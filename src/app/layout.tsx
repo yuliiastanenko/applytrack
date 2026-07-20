@@ -31,8 +31,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         <nav className="max-w-3xl mx-auto px-6 py-4 flex gap-4 text-sm text-gray-600 border-b border-gray-200">
-          <Link href="/login" className="hover:text-black">
-            Login
+          <Link href="/" className="hover:text-black">
+            Dashboard
           </Link>
           <Link href="/applications" className="hover:text-black">
             Applications

@@ -22,7 +22,7 @@ export default function NewEventForm({
   const [note, setNote] = useState("")
   const router = useRouter()
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
     await fetch(`/api/applications/${applicationId}/events`, {
@@ -57,7 +57,7 @@ export default function NewEventForm({
       />
       <button
         type="submit"
-        className="bg-black text-white rounded-lg px-4 py-2 text-sm self-start"
+        className="bg-blue-500 text-white rounded-lg px-4 py-2 text-sm self-start"
       >
         Add event
       </button>

@@ -11,7 +11,7 @@ export default function NewCriteriaForm() {
   const [error, setError] = useState("")
   const router = useRouter()
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setError("")
 
@@ -59,24 +59,26 @@ export default function NewCriteriaForm() {
         placeholder="Email for notifications"
         className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
       />
-      <div className="flex items-center gap-2">
-        <label className="text-sm text-gray-600">Check every</label>
-        <input
-          value={intervalDays}
-          onChange={(e) => setIntervalDays(e.target.value)}
-          type="number"
-          min="1"
-          className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-20"
-        />
-        <span className="text-sm text-gray-600">days</span>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-gray-600">Check every</label>
+          <input
+            value={intervalDays}
+            onChange={(e) => setIntervalDays(e.target.value)}
+            type="number"
+            min="1"
+            className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-20"
+          />
+          <span className="text-sm text-gray-600">days</span>
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white rounded-lg px-6 py-2 text-sm"
+        >
+          Add
+        </button>
       </div>
-      <button
-        type="submit"
-        className="bg-black text-white rounded-lg px-4 py-2 text-sm self-start"
-      >
-        Add
-      </button>
-       {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </form>
   )
 }

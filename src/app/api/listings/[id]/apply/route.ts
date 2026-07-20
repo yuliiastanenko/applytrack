@@ -8,7 +8,9 @@ export async function POST(
 ) {
   const { id } = await params
   const userId = await getCurrentUserId()
-
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
   const listing = await db.jobListing.findUnique({ where: { id } })
 
   if (!listing) {

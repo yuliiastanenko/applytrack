@@ -26,7 +26,7 @@ export default function TagInput() {
     )
   }
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       event.preventDefault()
       addTag()
@@ -45,7 +45,7 @@ export default function TagInput() {
         />
         <button
           onClick={addTag}
-          className="bg-black text-white rounded-lg px-4 py-2 text-sm"
+          className="bg-blue-500 text-white rounded-lg px-4 py-2 text-sm"
         >
           Add
         </button>

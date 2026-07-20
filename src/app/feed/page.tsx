@@ -43,19 +43,19 @@ export default async function Feed({
       <div className="flex gap-2 mb-4">
         <Link
           href={tags ? `/feed?tags=${encodeURIComponent(tags)}` : "/feed"}
-          className={`text-sm px-3 py-1.5 rounded-lg border ${!source ? "bg-black text-white border-black" : "border-gray-300"}`}
+          className={`text-sm px-3 py-1.5 rounded-lg border ${!source ? "bg-green-400 text-white border-green" : "border-gray-300"}`}
         >
           All
         </Link>
         <Link
           href={`/feed?source=remotive${tags ? `&tags=${encodeURIComponent(tags)}` : ""}`}
-          className={`text-sm px-3 py-1.5 rounded-lg border ${source === "remotive" ? "bg-black text-white border-black" : "border-gray-300"}`}
+          className={`text-sm px-3 py-1.5 rounded-lg border ${source === "remotive" ? "bg-red-400 text-white border-red" : "border-gray-300"}`}
         >
           Remotive
         </Link>
         <Link
           href={`/feed?source=arbeitnow${tags ? `&tags=${encodeURIComponent(tags)}` : ""}`}
-          className={`text-sm px-3 py-1.5 rounded-lg border ${source === "arbeitnow" ? "bg-black text-white border-black" : "border-gray-300"}`}
+          className={`text-sm px-3 py-1.5 rounded-lg border ${source === "arbeitnow" ? "bg-yellow-400 text-white border-yellow" : "border-gray-300"}`}
         >
           Arbeitnow
         </Link>

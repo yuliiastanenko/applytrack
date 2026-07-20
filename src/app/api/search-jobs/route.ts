@@ -10,7 +10,9 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const tagsParam = searchParams.get("tags")
   const userId = await getCurrentUserId()
-
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
   const criteriaToRun = tagsParam
     ? [
         {

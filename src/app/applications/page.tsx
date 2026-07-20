@@ -17,7 +17,9 @@ export default async function Applications({
     where: {
       userId,
       ...(status ? { status } : {}),
-      ...(search ? { company: { contains: search, mode: "insensitive" } } : {}),
+      ...(search
+        ? { company: { contains: search, mode: "insensitive" as const } }
+        : {}),
     },
   })
 
@@ -62,6 +64,11 @@ export default async function Applications({
               <p className="font-medium">{app.company}</p>
               <p className="text-gray-500">{app.position}</p>
             </Link>
+            {app.followUpAt && new Date(app.followUpAt) < new Date() && (
+              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 ml-2">
+                Follow-up overdue
+              </span>
+            )}
             <div className="flex items-center gap-2">
               <StatusButton id={app.id} currentStatus={app.status} />
               <DeleteButton id={app.id} />

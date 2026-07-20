@@ -13,7 +13,7 @@ export default function AddToTrackerButton({ jobId }: { jobId: string }) {
   return (
     <button
       onClick={handleClick}
-      className="bg-black text-white rounded-lg px-3 py-1.5 text-sm whitespace-nowrap"
+      className="bg-blue-500 text-white rounded-lg px-3 py-1.5 text-sm whitespace-nowrap"
     >
       Add
     </button>

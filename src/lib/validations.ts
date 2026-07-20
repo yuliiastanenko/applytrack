@@ -3,7 +3,16 @@ import { z } from "zod"
 export const applicationSchema = z.object({
   company: z.string().min(1, "Company is required"),
   position: z.string().min(1, "Position is required"),
-  status: z.enum(["WISHLIST", "APPLIED", "SCREENING", "INTERVIEW", "OFFER", "REJECTED"]).optional(),
+  status: z
+    .enum([
+      "WISHLIST",
+      "APPLIED",
+      "SCREENING",
+      "INTERVIEW",
+      "OFFER",
+      "REJECTED",
+    ])
+    .optional(),
 })
 
 export const eventSchema = z.object({

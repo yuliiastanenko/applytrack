@@ -9,7 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const router = useRouter()
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault()
 
     const res = await fetch("/api/login", {
@@ -42,7 +42,7 @@ export default function Login() {
           placeholder="Password"
           className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
         />
-        <button className="bg-black text-white rounded-lg px-4 py-2 text-sm">
+        <button className="bg-blue-500 text-white rounded-lg px-4 py-2 text-sm">
           Log in
         </button>
       </form>

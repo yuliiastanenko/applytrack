@@ -9,7 +9,7 @@ export default function NewApplicationForm() {
   const [error, setError] = useState("")
   const router = useRouter()
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setError("")
 
@@ -46,7 +46,7 @@ export default function NewApplicationForm() {
         />
         <button
           type="submit"
-          className="bg-black text-white rounded-lg px-4 py-2 text-sm"
+          className="bg-blue-500 text-white rounded-lg px-4 py-2 text-sm"
         >
           Add
         </button>

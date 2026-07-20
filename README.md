@@ -2,12 +2,12 @@
 
 I built this because job hunting last year meant a dozen browser tabs, three spreadsheets, and me still forgetting who I'd already applied to. So I made this instead: it searches job boards for me, tracks every application through to an offer, and emails me when something new shows up that matches what I'm looking for.
 
-## Try it
+### Try it
 
 - **Live**: https://applytrack-sooty.vercel.app
 - **Demo login**: `demo@applytrack.dev` / `demo1234`
 
-## What it does
+### What it does
 
 You track your applications on a Kanban board — drag a card from "Applied" to "Interview" and it's saved. Every application has its own timeline, so I can see when I applied, when the recruiter called, when things went quiet.
 
@@ -15,17 +15,17 @@ The part I actually wanted from day one: set a search (say, "junior react remote
 
 There's a small dashboard too, mostly so I stop lying to myself about how many places I've actually applied to this week.
 
-## Built with
+### Built with
 
 Next.js and TypeScript for the app itself, Postgres (via Neon) and Prisma for the data, Tailwind for styling, Zod for validating anything a user sends in, Resend for the emails, Recharts for the one chart I needed, and dnd-kit for the board. Tests run with Vitest, and GitHub Actions runs them on every push so I stop finding out things are broken the hard way.
 
-## A couple of decisions worth explaining
+### A couple of decisions worth explaining
 
 Each job source (Remotive, Arbeitnow) is just a small adapter behind one shared interface. Adding a third source later means writing one new file, not touching anything else — which was the whole point of designing it that way.
 
 Duplicate listings are handled at the database level: a unique constraint on `(user, source, external id)` means the same listing can show up in a search a hundred times and it still only gets saved once.
 
-## What's actually done
+### What's actually done
 
 - Full authentication flow — sign up, log in, bcrypt-hashed passwords, cookie-based sessions, protected routes
 - Application tracker — create, filter, search, update status, delete, with a full event timeline per application
@@ -39,9 +39,9 @@ Duplicate listings are handled at the database level: a unique constraint on `(u
 - CI pipeline (GitHub Actions) running lint and tests on every push
 - Deployed on Vercel with a scheduled cron job for the email digest
 
-## Running it locally
+### Running it locally
 
-\`\`\`bash
+```bash
 git clone https://github.com/yuliiastanenko/applytrack.git
 cd applytrack
 npm install
@@ -49,17 +49,10 @@ npm install
 npx prisma migrate dev
 npm run seed
 npm run dev
-\`\`\`
+```
 
-## Tests
+### Tests
 
-\`\`\`bash
+```bash
 npm run test
-\`\`\`
-
-## Still on my list
-
-- Swap the cookie-based login for real Auth.js
-- Paginate the job source APIs so searches cover more listings
-- Move job fetching off on-demand requests and onto a proper queue
-- Dark mode, eventually
+```
